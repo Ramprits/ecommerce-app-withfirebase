@@ -1,56 +1,35 @@
 import React from "react";
-import {
-  ThemeProvider,
-  CSSReset,
-  Box,
-  Image,
-  Flex,
-  Badge,
-  Text
-} from "@chakra-ui/core";
-import { MdStar } from "react-icons/md";
+import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { Switch, Route, Redirect } from "react-router-dom";
 import { customTheme } from "./theme";
+import Header from "./layout/Header";
+import Footer from "./layout/Footer";
+import Home from "./pages/homepage/Home.component";
+import Contact from "./pages/contactpage/Contact.component";
+import Shop from "./pages/shop/Shop.component";
+import Authentication from "./pages/authentication";
 
 function App() {
   return (
     <ThemeProvider theme={customTheme}>
       <CSSReset />
-
-      <Box
-        maxWidth={400}
-        p={4}
-        borderRadius={4}
-        borderWidth={2}
-        borderStyle="solid"
-        m="auto"
-        my={4}
-      >
-        <Image rounded="md" src="https://bit.ly/2k1H1t6" />
-        <Flex align="baseline" mt={2}>
-          <Badge variantColor="brand">Plus</Badge>
-          <Text
-            ml={2}
-            textTransform="uppercase"
-            fontSize="sm"
-            fontWeight="bold"
-            color="brand.800"
-          >
-            Verified &bull; Cape Town
-          </Text>
-        </Flex>
-        <Text mt={2} fontSize="xl" fontWeight="semibold" lineHeight="short">
-          Modern, Chic Penthouse with Mountain, City & Sea Views
-        </Text>
-        <Text mt={2}>$119/night</Text>
-        <Flex mt={2} align="center">
-          <Box as={MdStar} color="orange.400" />
-          <Text ml={1} fontsize="sm">
-            <b>4.84</b> (190)
-          </Text>
-        </Flex>
-      </Box>
-
-      <Text textAlign="center">Create React App Chakra UI</Text>
+      <Header />
+      <div className="container" style={{ marginTop: "2em" }}>
+        <Switch>
+          <Route path="/" exact>
+            <Home />
+          </Route>
+          <Route path="/shop">
+            <Shop />
+          </Route>
+          <Route path="/contact">
+            <Contact />
+          </Route>
+          <Route path="/signup">
+            <Authentication />
+          </Route>
+        </Switch>
+      </div>
     </ThemeProvider>
   );
 }

@@ -7,16 +7,16 @@ export const customTheme = {
     // Go to https://smart-swatch.netlify.com/ to easily generate a new color
     // palette.
     brand: {
-      50: "#ffe2e7",
-      100: "#ffb3bb",
-      200: "#fc8393",
-      300: "#f9526d",
-      400: "#f6224b",
-      500: "#dd0939",
-      600: "#ad0320",
-      700: "#7c000e",
-      800: "#4d0002",
-      900: "#200400"
+      50: "#ddf5ff",
+      100: "#b2ddfe",
+      200: "#85c4f9",
+      300: "#56adf3",
+      400: "#2a95ee",
+      500: "#117cd5",
+      600: "#0560a7",
+      700: "#004578",
+      800: "#00294b",
+      900: "#000f1f"
     }
   }
 };
