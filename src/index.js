@@ -1,16 +1,22 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import "bulma/css/bulma.css";
 import { BrowserRouter, HashRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+
+import App from "./App";
+
+import "bulma/css/bulma.css";
+import store from "./redux/store";
 import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </BrowserRouter>,
+  <Provider store={store}>
+    <BrowserRouter>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </BrowserRouter>
+  </Provider>,
   document.getElementById("root")
 );
 

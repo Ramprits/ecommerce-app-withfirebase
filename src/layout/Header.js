@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import { auth } from "../firebase/firebase-utils";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+
 const Header = ({ currentUser }) => {
   const history = useHistory();
   const [active, setActive] = useState(false);
+
   return (
     <nav className="navbar" role="navigation" aria-label="main navigation">
       <div className="container">
@@ -56,7 +59,7 @@ const Header = ({ currentUser }) => {
           <div className="navbar-end">
             <div className="navbar-item">
               <div className="buttons">
-                {currentUser ? (
+                {currentUser && currentUser.userAuth !== null ? (
                   <button
                     className="button is-link"
                     onClick={() => {
@@ -84,4 +87,8 @@ const Header = ({ currentUser }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Header);

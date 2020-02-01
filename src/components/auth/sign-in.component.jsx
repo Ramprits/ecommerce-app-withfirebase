@@ -10,13 +10,20 @@ const SignIn = () => {
   const onSubmit = async data => {
     try {
       const { email, password } = data;
-      await auth.signInWithEmailAndPassword(email, password);
-      reset();
-      history.push({ pathname: "/" });
+      await auth
+        .signInWithEmailAndPassword(email, password)
+        .then(res => {
+          console.log(res);
+          reset();
+          history.push({ pathname: "/" });
+        })
+        .catch(error => {
+          console.error(error.message);
+          return;
+        });
     } catch (error) {
       console.error(error);
     }
-    console.log(data);
   };
   return (
     <form className="box" onSubmit={handleSubmit(onSubmit)}>
