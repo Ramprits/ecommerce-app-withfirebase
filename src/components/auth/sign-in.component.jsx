@@ -1,9 +1,21 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Input, Button } from "@chakra-ui/core";
+import { useHistory } from "react-router-dom";
+import { auth } from "../../firebase/firebase-utils";
+import { signInWithGoogle } from "../../firebase/firebase-utils";
+import { Input } from "@chakra-ui/core";
 const SignIn = () => {
-  const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => {
+  const history = useHistory();
+  const { register, handleSubmit, reset } = useForm();
+  const onSubmit = async data => {
+    try {
+      const { email, password } = data;
+      await auth.signInWithEmailAndPassword(email, password);
+      reset();
+      history.push({ pathname: "/" });
+    } catch (error) {
+      console.error(error);
+    }
     console.log(data);
   };
   return (
@@ -36,9 +48,15 @@ const SignIn = () => {
         </div>
       </div>
       <div className="field">
-        <Button variantColor="green" type="submit">
-          Login
-        </Button>
+        <div className="buttons">
+          <button className="button is-primary" type="submit">
+            Sign In
+          </button>
+          <button className="button is-link" onClick={signInWithGoogle}>
+            {" "}
+            SignIn With Google
+          </button>
+        </div>
       </div>
     </form>
   );

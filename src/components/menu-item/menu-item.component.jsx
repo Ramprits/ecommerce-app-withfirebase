@@ -9,7 +9,7 @@ const MenuItem = ({ title, imageUrl, linkUrl }) => {
             <img src={imageUrl} alt={title} />
           </figure>
         </div>
-        <div class="card-content">{title}</div>
+        <div className="card-content">{title}</div>
       </div>
     </div>
   );

@@ -9,8 +9,8 @@ const CollectionPreview = ({ title, items }) => {
           items
             .filter((item, idx) => idx < 4)
             .map(({ id, name, imageUrl, price }) => (
-              <div className="column is-3">
-                <div className="card" key={id}>
+              <div key={id} className="column is-3">
+                <div className="card">
                   <div className="card-image">
                     <figure className="image is-4by3">
                       <img src={imageUrl} alt={name} />
