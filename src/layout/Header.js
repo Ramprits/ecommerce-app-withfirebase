@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
+import { useHistory, Link } from "react-router-dom";
+import CartDropdown from "../components/cart-dropdown";
 import { auth } from "../firebase/firebase-utils";
-import { Link } from "react-router-dom";
-import { useHistory } from "react-router-dom";
 
-const Header = ({ currentUser }) => {
+const Header = ({ currentUser, hidden }) => {
   const history = useHistory();
   const [active, setActive] = useState(false);
 
@@ -57,11 +57,12 @@ const Header = ({ currentUser }) => {
           </div>
 
           <div className="navbar-end">
+            <CartDropdown />
             <div className="navbar-item">
               <div className="buttons">
                 {currentUser && currentUser.userAuth !== null ? (
                   <button
-                    className="button is-link"
+                    className="button is-link is-small is-rounded"
                     onClick={() => {
                       auth.signOut();
                       history.push({ pathname: "/signup" });
@@ -73,7 +74,7 @@ const Header = ({ currentUser }) => {
                   <Link
                     onClick={() => setActive(!active)}
                     to="/signup"
-                    className="button is-primary"
+                    className="button is-primary is-small is-rounded"
                   >
                     <strong>Sign In</strong>
                   </Link>
@@ -87,8 +88,9 @@ const Header = ({ currentUser }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+  currentUser,
+  hidden
 });
 
 export default connect(mapStateToProps)(Header);

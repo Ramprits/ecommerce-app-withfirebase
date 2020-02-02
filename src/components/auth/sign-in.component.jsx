@@ -6,7 +6,12 @@ import { signInWithGoogle } from "../../firebase/firebase-utils";
 import { Input } from "@chakra-ui/core";
 const SignIn = () => {
   const history = useHistory();
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm({
+    defaultValues: {
+      email: "vershasahani@gmail.com",
+      password: "versha@1234"
+    }
+  });
   const onSubmit = async data => {
     try {
       const { email, password } = data;
