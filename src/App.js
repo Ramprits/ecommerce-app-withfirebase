@@ -1,17 +1,23 @@
 import React, { Suspense, lazy } from "react";
 import { ThemeProvider, CSSReset } from "@chakra-ui/core";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { selectCurrentUser } from "./redux/user/user-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
 import { Switch, Route, Redirect } from "react-router-dom";
 import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
 import { customTheme } from "./theme";
 import Loading from "./components/loading";
+
 const Header = lazy(() => import("./layout/Header"));
 const Home = lazy(() => import("./pages/homepage/Home.component"));
 const Contact = lazy(() => import("./pages/contactpage/Contact.component"));
 const Shop = lazy(() => import("./pages/shop/Shop.component"));
 const Authentication = lazy(() => import("./pages/authentication"));
-
+const Checkout = lazy(() => import("./pages/checkout/checkout.component"));
+const PageNotFound = lazy(() =>
+  import("./pages/page-not-found/page-not-fount.component")
+);
 class App extends React.Component {
   unSubscribeFromAuth = null;
   componentDidMount() {
@@ -52,6 +58,14 @@ class App extends React.Component {
               <Route path="/contact">
                 <Contact />
               </Route>
+              <Route path="/checkout">
+                <Checkout />
+              </Route>
+
+              <Route path="/checkout">
+                <PageNotFound />
+              </Route>
+
               <Route
                 exact
                 path="/signup"
@@ -75,8 +89,8 @@ const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

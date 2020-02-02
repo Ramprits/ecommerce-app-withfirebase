@@ -1,6 +1,8 @@
 import React from "react";
+import { connect } from "react-redux";
+import { addCartItem } from "../../redux/cart/cart-actions";
 
-const CollectionPreview = ({ title, items }) => {
+const CollectionPreview = ({ title, items, addCartItem }) => {
   return (
     <>
       <h3>{title}</h3>
@@ -8,12 +10,16 @@ const CollectionPreview = ({ title, items }) => {
         {items &&
           items
             .filter((item, idx) => idx < 4)
-            .map(({ id, name, imageUrl, price }) => (
-              <div key={id} className="column is-3">
+            .map(item => (
+              <div
+                key={item.id}
+                className="column is-3"
+                onClick={() => addCartItem(item)}
+              >
                 <div className="card">
                   <div className="card-image">
                     <figure className="image is-4by3">
-                      <img src={imageUrl} alt={name} />
+                      <img src={item.imageUrl} alt={item.name} />
                     </figure>
                   </div>
                   <div className="cart-content">
@@ -24,7 +30,7 @@ const CollectionPreview = ({ title, items }) => {
                       }}
                     >
                       <button className="button is-light">Cart</button>
-                      <span className="button is-light">${price}</span>
+                      <span className="button is-light">${item.price}</span>
                     </div>
                   </div>
                 </div>
@@ -35,4 +41,12 @@ const CollectionPreview = ({ title, items }) => {
   );
 };
 
-export default CollectionPreview;
+// const mapStateToProps = (state) => ({
+
+// })
+
+const mapDispatchToProps = dispatch => ({
+  addCartItem: item => dispatch(addCartItem(item))
+});
+
+export default connect(null, mapDispatchToProps)(CollectionPreview);

@@ -1,8 +1,17 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createStructuredSelector } from "reselect";
+import { useHistory } from "react-router-dom";
 import { toggleCartHidden } from "../../redux/cart/cart-actions";
+import {
+  selectCartItemCounts,
+  selectCartItems,
+  selectCartHidden
+} from "../../redux/cart/cart-selectors";
 import CartIcon from "../shopping-icon";
-const CartDropdown = ({ toggleCartHidden, hidden }) => {
+import CartItem from "../cart-item";
+const CartDropdown = ({ toggleCartHidden, hidden, cartItems, itemCount }) => {
+  const history = useHistory();
   return (
     <div className="navbar-item">
       <div
@@ -10,26 +19,28 @@ const CartDropdown = ({ toggleCartHidden, hidden }) => {
         onClick={toggleCartHidden}
       >
         <div className="dropdown-trigger">
-          <CartIcon />
+          <CartIcon count={itemCount} />
         </div>
-        <div className="dropdown-menu" id="dropdown-menu4" role="menu">
+        <div
+          className="dropdown-menu"
+          id="dropdown-menu4"
+          role="menu"
+          style={{ width: "300px" }}
+        >
           <div className="dropdown-content">
             <div className="dropdown-item">
-              <div className="columns">
-                <div className="column is-4">
-                  <figure className="image is-256x256">
-                    <img
-                      alt="logo"
-                      src="https://bulma.io/images/placeholders/256x256.png"
-                    />
-                  </figure>
-                </div>
-                <div className="column is-8">This is product name</div>
-              </div>
+              {cartItems.map(cartItem => (
+                <CartItem key={cartItem.id} {...cartItem} />
+              ))}
             </div>
-            <hr className="dropdown-divider" />{" "}
+            <hr className="dropdown-divider" />
             <div className="has-text-centered">
-              <button className="button is-link is-small">Check Out</button>
+              <button
+                className="button is-link is-small"
+                onClick={() => history.push({ pathname: "/checkout" })}
+              >
+                Check Out
+              </button>
             </div>
           </div>
         </div>
@@ -42,8 +53,10 @@ const mapDispatchToProps = dispatch => ({
   toggleCartHidden: () => dispatch(toggleCartHidden())
 });
 
-const mapStateToProps = ({ cart: { hidden } }) => ({
-  hidden
+const mapStateToProps = createStructuredSelector({
+  hidden: selectCartHidden,
+  cartItems: selectCartItems,
+  itemCount: selectCartItemCounts
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CartDropdown);
