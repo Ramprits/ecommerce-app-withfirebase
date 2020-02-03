@@ -41,10 +41,6 @@ const CollectionPreview = ({ title, items, addCartItem }) => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-
-// })
-
 const mapDispatchToProps = dispatch => ({
   addCartItem: item => dispatch(addCartItem(item))
 });

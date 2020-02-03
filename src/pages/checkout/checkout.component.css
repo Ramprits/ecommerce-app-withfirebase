@@ -1,0 +1,9 @@
+.quantity {
+  display: flex !important;
+}
+.value {
+  margin: 0 10px;
+}
+.arrow {
+  cursor: pointer;
+}
