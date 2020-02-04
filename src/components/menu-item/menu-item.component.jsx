@@ -6,9 +6,7 @@ const MenuItem = ({ title, imageUrl, linkUrl }) => {
   return (
     <div
       className="column is-4"
-      onClick={() =>
-        history.push({ pathname: "/product", search: `?q=${linkUrl}` })
-      }
+      onClick={() => history.push({ pathname: `/shop/${title}` })}
     >
       <div className="card">
         <div className="card-image">

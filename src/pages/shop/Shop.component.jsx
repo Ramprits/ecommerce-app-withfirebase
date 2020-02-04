@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+import React from "react";
+import { connect } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { selectShops } from "../../redux/shop/shop-selectors";
+import { createStructuredSelector } from "reselect";
 import CollectionPreview from "../../components/collections/collection-preview";
-import Collections from "./shop.data";
-const Shop = () => {
-  const [collections] = useState(Collections);
+
+const ShopCollection = ({ shops, match }) => {
+  const history = useHistory();
   return (
     <>
-      {collections.map(({ id, title, ...otherProps }) => {
-        return <CollectionPreview key={id} title={title} {...otherProps} />;
+      {shops.map(({ id, title, ...otherProps }) => {
+        return (
+          <CollectionPreview
+            handleClick={() =>
+              history.push({ pathname: `${match.path}/${title}` })
+            }
+            key={id}
+            title={title}
+            {...otherProps}
+          />
+        );
       })}
     </>
   );
 };
-export default Shop;
+
+const mapStateToProps = createStructuredSelector({
+  shops: selectShops
+});
+
+export default connect(mapStateToProps)(ShopCollection);

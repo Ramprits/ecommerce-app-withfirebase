@@ -12,7 +12,10 @@ import Loading from "./components/loading";
 const Header = lazy(() => import("./layout/Header"));
 const Home = lazy(() => import("./pages/homepage/Home.component"));
 const Contact = lazy(() => import("./pages/contactpage/Contact.component"));
-const Shop = lazy(() => import("./pages/shop/Shop.component"));
+const ShopCollection = lazy(() => import("./pages/shop/Shop.component"));
+const CollectionItem = lazy(() =>
+  import("./components/collections/collection-item")
+);
 const Authentication = lazy(() => import("./pages/authentication"));
 const Checkout = lazy(() => import("./pages/checkout/checkout.component"));
 const PageNotFound = lazy(() =>
@@ -52,9 +55,11 @@ class App extends React.Component {
               <Route path="/" exact>
                 <Home />
               </Route>
-              <Route path="/shop">
-                <Shop />
-              </Route>
+              <Route exact path="/shop" component={ShopCollection}></Route>
+              <Route
+                path={`/shop/:collectionId`}
+                component={CollectionItem}
+              ></Route>
               <Route path="/contact">
                 <Contact />
               </Route>
