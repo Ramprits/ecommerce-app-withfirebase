@@ -1,6 +1,14 @@
 import React from "react";
-
-const CartItem = ({ name, imageUrl, price, quantity }) => {
+import { connect } from "react-redux";
+import { removeItem } from "../../redux/cart/cart-actions";
+const CartItem = ({
+  name,
+  imageUrl,
+  price,
+  quantity,
+  removeItem,
+  cartItem
+}) => {
   return (
     <article className="media">
       <figure className="media-left">
@@ -21,10 +29,17 @@ const CartItem = ({ name, imageUrl, price, quantity }) => {
         </nav>
       </div>
       <div className="media-right">
-        <button className="delete"></button>
+        <button
+          className="delete"
+          onClick={() => removeItem(cartItem)}
+        ></button>
       </div>
     </article>
   );
 };
 
-export default CartItem;
+const mapDispatchToProps = dispatch => ({
+  removeItem: item => dispatch(removeItem(item))
+});
+
+export default connect(null, mapDispatchToProps)(CartItem);

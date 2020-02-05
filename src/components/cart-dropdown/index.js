@@ -30,7 +30,7 @@ const CartDropdown = ({ toggleCartHidden, hidden, cartItems, itemCount }) => {
           <div className="dropdown-content">
             <div className="dropdown-item">
               {cartItems.map(cartItem => (
-                <CartItem key={cartItem.id} {...cartItem} />
+                <CartItem key={cartItem.id} cartItem={cartItem} {...cartItem} />
               ))}
             </div>
             <hr className="dropdown-divider" />
