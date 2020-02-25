@@ -22,13 +22,13 @@ const CollectionPreview = ({ title, items, addCartItem, handleClick }) => {
               .map(item => (
                 <div key={item.id} className="column is-3">
                   <div className="block">
-                    <div class="image-container">
-                      <figure class="image is-square">
+                    <div className="image-container">
+                      <figure className="image is-square">
                         <img src={item.imageUrl} alt="" />
                       </figure>
-                      <div class="middle">
+                      <div className="middle">
                         <button
-                          class="button is-success"
+                          className="button is-success"
                           onClick={() => addCartItem(item)}
                         >
                           Add To Cart

@@ -1,5 +1,7 @@
 import React from "react";
+import { Image, Box } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
+import "./menu-item.styles.css";
 
 const MenuItem = ({ title, imageUrl, linkUrl }) => {
   const history = useHistory();
@@ -8,13 +10,13 @@ const MenuItem = ({ title, imageUrl, linkUrl }) => {
       className="column is-4"
       onClick={() => history.push({ pathname: `/shop/${title}` })}
     >
-      <div className="card">
-        <div className="card-image">
-          <figure className="image is-4by3">
-            <img src={imageUrl} alt={title} />
-          </figure>
+      <div className="image-container">
+        <Box className="image is-square">
+          <Image src={imageUrl} alt="" />
+        </Box>
+        <div className="middle">
+          <button className="button is-link">{title}</button>
         </div>
-        <div className="card-content is-capitalized">{title}</div>
       </div>
     </div>
   );

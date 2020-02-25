@@ -34,6 +34,7 @@ const sections = [
     linkUrl: "Mens"
   }
 ];
+
 const Directory = () => {
   return (
     <div className="columns is-multiline">

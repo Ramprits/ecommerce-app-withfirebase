@@ -2,6 +2,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { auth, createUserProfileDocument } from "../../firebase/firebase-utils";
 import { Input, Button } from "@chakra-ui/core";
+
 const SignUp = () => {
   const { register, handleSubmit, reset } = useForm();
   const onSubmit = async data => {
