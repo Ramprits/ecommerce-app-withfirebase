@@ -1,42 +1,28 @@
 import React from "react";
+import { Image } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { removeItem } from "../../redux/cart/cart-actions";
-const CartItem = ({
-  name,
-  imageUrl,
-  price,
-  quantity,
-  removeItem,
-  cartItem
-}) => {
-  return (
-    <article className="media">
-      <figure className="media-left">
-        <p className="image is-64x64">
-          <img alt="logo" src={imageUrl} />
+const CartItem = ({ name, imageUrl, removeItem, cartItem }) => (
+  <article className="media">
+    <figure className="media-left">
+      <Image rounded="full" size="50px" alt="logo" src={imageUrl} />
+    </figure>
+    <div className="media-content">
+      <div className="content">
+        <p>
+          <strong>{name}</strong>
         </p>
-      </figure>
-      <div className="media-content">
-        <div className="content">
-          <p>
-            <strong>{name}</strong>
-          </p>
-        </div>
-        <nav className="level is-mobile">
-          <div className="level-left">
-            {quantity} * ${price} = $ {quantity * price}
-          </div>
-        </nav>
       </div>
-      <div className="media-right">
-        <button
-          className="delete"
-          onClick={() => removeItem(cartItem)}
-        ></button>
-      </div>
-    </article>
-  );
-};
+    </div>
+    <div className="media-right">
+      <button
+        className="delete has-text-danger"
+        style={{ color: "red" }}
+        onClick={() => removeItem(cartItem)}
+      ></button>
+    </div>
+  </article>
+);
 
 const mapDispatchToProps = dispatch => ({
   removeItem: item => dispatch(removeItem(item))

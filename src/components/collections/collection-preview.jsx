@@ -1,10 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Button } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 import { addCartItem } from "../../redux/cart/cart-actions";
 import "./collection-item.css";
 
-const CollectionPreview = ({ title, items, addCartItem, handleClick }) => {
+const CollectionPreview = ({ title, items, addCartItem }) => {
   const history = useHistory();
   return (
     <>
@@ -27,12 +28,13 @@ const CollectionPreview = ({ title, items, addCartItem, handleClick }) => {
                         <img src={item.imageUrl} alt="" />
                       </figure>
                       <div className="middle">
-                        <button
-                          className="button is-success"
+                        <Button
                           onClick={() => addCartItem(item)}
+                          variantColor="green"
+                          size="sm"
                         >
                           Add To Cart
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   </div>

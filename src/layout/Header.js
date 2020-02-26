@@ -9,7 +9,11 @@ const Header = ({ currentUser, hidden }) => {
   const [active, setActive] = useState(false);
 
   return (
-    <nav className="navbar" role="navigation" aria-label="main navigation">
+    <nav
+      className="navbar is-link"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div className="container">
         <div className="navbar-brand">
           <a className="navbar-item" href="https://bulma.io">

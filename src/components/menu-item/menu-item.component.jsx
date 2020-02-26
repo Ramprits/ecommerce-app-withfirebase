@@ -3,7 +3,7 @@ import { Image, Box } from "@chakra-ui/core";
 import { useHistory } from "react-router-dom";
 import "./menu-item.styles.css";
 
-const MenuItem = ({ title, imageUrl, linkUrl }) => {
+const MenuItem = ({ title, imageUrl }) => {
   const history = useHistory();
   return (
     <div

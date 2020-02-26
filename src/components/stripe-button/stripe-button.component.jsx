@@ -10,7 +10,7 @@ const StripeCheckoutButton = ({ price }) => {
     <div>
       <StripeCheckout
         label="Pay now"
-        name="CRWN Clothing Ltd."
+        name="Saint Gobain Ltd"
         billingAddress
         shippingAddress
         destination={`Your total is $${price}`}
