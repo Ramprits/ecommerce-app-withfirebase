@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Button } from "@chakra-ui/core";
 import { addCartItem } from "../../redux/cart/cart-actions";
-import { selectCollections } from "../../redux/shop/shop-selectors";
+import { shopCollectionById } from "../../redux/shop/shop-selectors";
 import "./collection-item.css";
 
 const CollectionItem = ({ collection, addCartItem }) => {
@@ -39,7 +39,7 @@ const CollectionItem = ({ collection, addCartItem }) => {
   );
 };
 const mapStateToProps = (state, owner) => ({
-  collection: selectCollections(owner.match.params.collectionId)(state)
+  collection: shopCollectionById(owner.match.params.collectionId)(state)
 });
 
 const mapDispatchToProps = dispatch => ({
