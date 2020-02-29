@@ -1,16 +1,15 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Button } from "@chakra-ui/core";
+import { Button, Text } from "@chakra-ui/core";
 import { addCartItem } from "../../redux/cart/cart-actions";
 import { shopCollectionById } from "../../redux/shop/shop-selectors";
 import "./collection-item.css";
 
 const CollectionItem = ({ collection, addCartItem }) => {
-  console.log(collection);
-
   return (
     <section className="section">
       <div className="container has-text-centered">
+        <Text fontSize="3xl">In love with React & Next</Text>
         <div className="columns is-multiline is-centered">
           {collection &&
             collection.items.map(c => (

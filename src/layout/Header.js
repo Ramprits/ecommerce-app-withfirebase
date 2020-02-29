@@ -4,7 +4,7 @@ import { useHistory, Link } from "react-router-dom";
 import CartDropdown from "../components/cart-dropdown";
 import { auth } from "../firebase/firebase-utils";
 
-const Header = ({ currentUser, hidden }) => {
+const Header = ({ currentUser, hidden, cartItems }) => {
   const history = useHistory();
   const [active, setActive] = useState(false);
 
@@ -61,7 +61,7 @@ const Header = ({ currentUser, hidden }) => {
           </div>
 
           <div className="navbar-end">
-            <CartDropdown />
+            {cartItems.length > 0 ? <CartDropdown /> : ""}
             <div className="navbar-item">
               <div className="buttons">
                 {currentUser && currentUser.userAuth !== null ? (
@@ -92,9 +92,13 @@ const Header = ({ currentUser, hidden }) => {
   );
 };
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+const mapStateToProps = ({
+  user: { currentUser },
+  cart: { hidden, cartItems }
+}) => ({
   currentUser,
-  hidden
+  hidden,
+  cartItems
 });
 
 export default connect(mapStateToProps)(Header);

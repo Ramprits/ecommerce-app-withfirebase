@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Image } from "@chakra-ui/core";
 import { createStructuredSelector } from "reselect";
 import {
   removeCartItem,
@@ -30,15 +31,17 @@ const Checkout = ({
       <div className="clearfix"></div>
       {cartItems.map(cartItem => (
         <article className="media" key={cartItem.id}>
-          <figure className="media-left">
-            <p className="image is-64x64">
-              <img alt="logo" src={cartItem.imageUrl} />
-            </p>
-          </figure>
+          <Image
+            rounded
+            alt="logo"
+            size="50px"
+            objectFit="cover"
+            src={cartItem.imageUrl}
+          />
           <div className="media-content">
             <div className="content">
               <div className="columns">
-                <div className="column is-4">{cartItem.name}</div>
+                <div className="column is-4"> {cartItem.name}</div>
                 <div className="column is-4">
                   <div className="quantity">
                     <div className="arrow" onClick={() => removeCart(cartItem)}>
