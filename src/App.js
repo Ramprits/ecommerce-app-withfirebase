@@ -1,11 +1,16 @@
 import React, { Suspense, lazy } from "react";
-import { ThemeProvider, CSSReset } from "@chakra-ui/core";
+import { ThemeProvider, CSSReset, AlertTitle } from "@chakra-ui/core";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { selectCurrentUser } from "./redux/user/user-selectors";
+import { shopCollectionPreview } from "./redux/shop/shop-selectors";
 import { setCurrentUser } from "./redux/user/user-actions";
 import { Switch, Route, Redirect } from "react-router-dom";
-import { auth, createUserProfileDocument } from "./firebase/firebase-utils";
+import {
+  auth,
+  createUserProfileDocument,
+  addCollectionAndDocument
+} from "./firebase/firebase-utils";
 import { customTheme } from "./theme";
 import Loading from "./components/loading";
 
@@ -23,8 +28,8 @@ const PageNotFound = lazy(() =>
 );
 class App extends React.Component {
   unSubscribeFromAuth = null;
-  componentDidMount() {
-    const { setCurrentUser } = this.props;
+  async componentDidMount() {
+    const { setCurrentUser, collections } = this.props;
     this.unSubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
       if (userAuth) {
         const userRef = await createUserProfileDocument(userAuth);
@@ -38,6 +43,11 @@ class App extends React.Component {
       setCurrentUser({ userAuth }, () => {
         console.log("Signed In", new Date());
       });
+
+      // await addCollectionAndDocument(
+      //   "shops",
+      //   collections.map(({ title, items }) => ({ title, items }))
+      // );
     });
   }
   componentWillUnmount() {
@@ -95,7 +105,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
+  currentUser: selectCurrentUser,
+  collections: shopCollectionPreview
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
